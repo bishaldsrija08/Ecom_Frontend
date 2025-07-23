@@ -3,11 +3,17 @@ import TextField from "../../components/TextField";
 
 const Register = () => {
     const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [phone, setPhone] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(email, username, password, confirmPassword, phone)
 
     };
+
     return (
         <div className="min-h-screen flex flex-col gap-3 justify-center items-center">
             <p>Register</p>
@@ -18,18 +24,21 @@ const Register = () => {
                     label={"Email"}
                     type="email"
                     value={email}
+                    placeholder={"Enter your email"}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <TextField
                     id={"username"}
                     label={"Username"}
                     value={username}
+                    placeholder={"Enter your username"}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <TextField
                     id={"phone"}
                     label={"Phone Number"}
                     value={phone}
+                    placeholder={"Enter your Phone Number"}
                     onChange={(e) => setPhone(e.target.value)}
                 />
                 <TextField

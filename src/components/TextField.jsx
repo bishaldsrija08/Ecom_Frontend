@@ -5,6 +5,7 @@ const TextField = ({
   label,
   placeholder = "placeholder",
   type = "text",
+  required = false
 }) => {
   return (
     <div className="flex flex-col gap-1">

@@ -1,9 +1,44 @@
-import React from 'react'
+import { useState } from "react";
+import TextField from "../../components/TextField";
 
 const ResetPassword = () => {
-  return (
-    <div>ResetPassword</div>
-  )
-}
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-export default ResetPassword
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
+    return (
+        <>
+            <div className="h-screen flex flex-col gap-3 justify-center items-center">
+                <p>Reset Password</p>
+                <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col p-4 gap-2 border border-gray-700"
+                >
+
+                    <TextField
+                        id={"password"}
+                        label={"Password"}
+                        value={password}
+                        placeholder="Enter your password"
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <TextField
+                        id={"confirmPassword"}
+                        label={"Confirm Password"}
+                        value={confirmPassword}
+                        placeholder={"Enter your confirm password"}
+                        type={"password"}
+                        required={"true"}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </>
+    );
+};
+
+export default ResetPassword;
