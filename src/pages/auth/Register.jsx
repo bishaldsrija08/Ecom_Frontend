@@ -1,16 +1,28 @@
 import { useState } from "react";
 import TextField from "../../components/TextField";
+import handlePostOperation from "../../config/handlePostOperation";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
-    const [username, setUsername] = useState("")
+    const [userName, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [phone, setPhone] = useState("")
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, username, password, confirmPassword, phone)
+        const result = await handlePostOperation("http://localhost:3000/api/register", {
+            email, userName, password, confirmPassword
+        })
+
+        if (result.status === 200) {
+            alert(result.data.message)
+            navigate("/login")
+        } else {
+            alert(result?.response?.data?.message)
+        }
 
     };
 
@@ -30,7 +42,7 @@ const Register = () => {
                 <TextField
                     id={"username"}
                     label={"Username"}
-                    value={username}
+                    value={userName}
                     placeholder={"Enter your username"}
                     onChange={(e) => setUsername(e.target.value)}
                 />

@@ -4,8 +4,7 @@ const TextField = ({
   onChange,
   label,
   placeholder = "placeholder",
-  type = "text",
-  required = false
+  type = "text"
 }) => {
   return (
     <div className="flex flex-col gap-1">

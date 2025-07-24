@@ -1,15 +1,21 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { navFields } from "../constants/navField"
 
 const Navbar = () => {
+    const location = useLocation();
+    const currentTab = location.pathname;
     return (
         <>
-            <nav className="flex gap-3 md:justify-center justify-between lg:justify-around border-2 border-gray-400 px-6 py-2 flex-wrap bg-red-500 md:bg-green-400">
-                <Link to={"/"}>Home</Link>
-                <Link to={"/register"}>Register</Link>
-                <Link to={"/login"}>Login</Link>
-                <Link to={"/forgot-password"}>Forgot-password</Link>
-                <Link to={"/verify-otp"}>Verify-otp</Link>
-                <Link to={"/reset-password"}>Reset-password</Link>
+            <nav className="flex gap-3 justify-center md:justify-around bg-amber-300 p-2">
+                {navFields.map((field) => {
+                    return (
+                        <Link className={`${field.path === currentTab
+                                ? "font-bold text-blue-700 hover:text-blue-400"
+                                : "hover:underline hover:underline-offset-2 hover:text-blue-500"
+                            } `} key={field.path} to={field.path}>{field.name}</Link>
+                    )
+                })}
+
             </nav>
         </>
     )
