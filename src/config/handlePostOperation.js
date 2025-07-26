@@ -1,12 +1,12 @@
-import axios from "axios"
+import axios from "axios";
 
 const handlePostOperation = async (url, data) => {
     try {
-        const response = await axios.post(url, data)
-        return response
+        const response = await axios.post(`http://localhost:3000/api/${url}`, data);
+        return response;
     } catch (error) {
-        return error
+        return error;
     }
-}
+};
 
-export default handlePostOperation
+export default handlePostOperation;

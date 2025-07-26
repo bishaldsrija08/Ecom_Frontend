@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TextField from "../../components/TextField";
+import handlePostOperation from "../../config/handlePostOperation";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ForgotPassword = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState("");
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email)
+        const result = await handlePostOperation("forgot-password", {
+            email
+        })
+        if (result.status === 200) {
+            toast.success(result.data.message)
+            navigate("/verify-otp", email)
+        } else {
+            toast.error(result?.response?.data?.message)
+        }
     };
     return (
         <div className="min-h-screen flex flex-col gap-3 justify-center items-center">

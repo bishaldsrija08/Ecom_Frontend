@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextField from "../../components/TextField";
 import handlePostOperation from "../../config/handlePostOperation";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -11,17 +12,17 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const result = await handlePostOperation("http://localhost:3000/api/login", {
+        const result = await handlePostOperation("login", {
             email, password
         })
 
         if (result.status === 200) {
-            alert(result.data.message)
+            localStorage.setItem("authToken", result.data.token);
+            toast.success(result.data.message)
             navigate("/")
         } else {
-            alert(result?.response?.data?.message)
+            toast.error(result?.response?.data?.message)
         }
-        console.log(result)
 
     };
     return (

@@ -6,6 +6,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword"
 import VerifyOtp from "./pages/auth/VerifyOtp"
 import ResetPassword from "./pages/auth/ResetPassword"
 import Navbar from "./components/Navbar"
+import { ToastContainer } from "react-toastify"
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
+        <ToastContainer/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register />} />
