@@ -1,13 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextField from "../../components/TextField";
+import handlePostOperation from "../../config/handlePostOperation";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
+    const navigate = useNavigate()
+    const email = localStorage.getItem("email");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const result = await handlePostOperation("reset-password", { password, email })
+        if (result.status === 200) {
+            localStorage.clear("email")
+            toast.success(result.data.message)
+            navigate("/login")
+        } else {
+            toast.error(result?.response?.data?.message)
+        }
+        console.log(result)
     };
+        useEffect(() => {
+            if (!email) {
+                navigate("/forgot-password")
+            }
+        },[])
     return (
         <>
             <div className="h-screen flex flex-col gap-3 justify-center items-center">

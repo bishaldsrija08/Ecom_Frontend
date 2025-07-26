@@ -14,7 +14,10 @@ const ForgotPassword = () => {
         })
         if (result.status === 200) {
             toast.success(result.data.message)
-            navigate("/verify-otp", email)
+            localStorage.setItem("email", email)
+            setTimeout(() => {
+                navigate("/verify-otp", email)
+            }, 1000);
         } else {
             toast.error(result?.response?.data?.message)
         }

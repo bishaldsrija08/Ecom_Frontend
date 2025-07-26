@@ -19,6 +19,7 @@ const Login = () => {
         if (result.status === 200) {
             localStorage.setItem("authToken", result.data.token);
             toast.success(result.data.message)
+            localStorage.setItem("authToken", result.data.token)
             navigate("/")
         } else {
             toast.error(result?.response?.data?.message)
