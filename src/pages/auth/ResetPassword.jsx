@@ -3,6 +3,7 @@ import TextField from "../../components/TextField";
 import handlePostOperation from "../../config/handlePostOperation";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import handleGetOperation from "../../config/handleGetOperation";
 
 const ResetPassword = () => {
     const navigate = useNavigate()
@@ -22,11 +23,21 @@ const ResetPassword = () => {
         }
         console.log(result)
     };
-        useEffect(() => {
-            if (!email) {
-                navigate("/forgot-password")
+    useEffect(() => {
+        if (!email) {
+            navigate("/forgot-password")
+        }
+        const handleAuth = async () => {
+            const result = await handleGetOperation("verify/reset-password")
+            if (result.status === 200) {
+                toast.success("login vyo")
+            } else {
+                toast.error("Please follow proper step")
+                navigate(-1)
             }
-        },[])
+        }
+        handleAuth()
+    }, [])
     return (
         <>
             <div className="h-screen flex flex-col gap-3 justify-center items-center">

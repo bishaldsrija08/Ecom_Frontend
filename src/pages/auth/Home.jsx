@@ -10,16 +10,16 @@ const Home = () => {
     if (!authToken) {
       navigate("/login")
     }
-    const handleHome = async () => {
+    const handleAuth = async () => {
       const result = await handleGetOperation("verify/home")
       if (result.status === 200) {
         toast.success("login vyo")
       } else {
-        toast.error("Plese login to procede")
+        toast.error("Plese follow proper steps")
         navigate("/login")
       }
     }
-    handleHome()
+    handleAuth()
   })
   return (
     <>

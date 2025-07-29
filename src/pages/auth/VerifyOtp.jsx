@@ -3,6 +3,7 @@ import TextField from "../../components/TextField";
 import handlePostOperation from "../../config/handlePostOperation";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import handleGetOperation from "../../config/handleGetOperation";
 
 const VerifyOtp = () => {
     const email = localStorage.getItem("email");
@@ -25,7 +26,17 @@ const VerifyOtp = () => {
         if (!email) {
             navigate("/forgot-password")
         }
-    },[])
+        const handleAuth = async () => {
+            const result = await handleGetOperation("verify/verify-otp")
+            if (result.status === 200) {
+                toast.success("login vyo")
+            } else {
+                toast.error("Please follow proper step")
+                navigate(-1)
+            }
+        }
+        handleAuth()
+    }, [])
     return (
         <div className="min-h-screen flex flex-col gap-3 justify-center items-center">
             <p>Verify Otp</p>
