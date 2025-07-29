@@ -1,7 +1,7 @@
 export const navFields = [
   {
     name: "Home",
-    path: "/",
+    path: "/home",
   },
   {
     name: "Login",
