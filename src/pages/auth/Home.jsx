@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import handleGetOperation from "../../config/handleGetOperation";
 import { toast } from "react-toastify";
+import { useMyContext } from "../../context/MyContextProvider";
 
 const Home = () => {
+  const {name, fruits} = useMyContext()
   const navigate = useNavigate()
   const authToken = localStorage.getItem("authToken")
   useEffect(() => {
@@ -23,6 +25,8 @@ const Home = () => {
   })
   return (
     <>
+    {name}
+    {fruits}
       <div>Home</div>;
     </>
   )

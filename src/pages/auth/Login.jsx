@@ -3,8 +3,10 @@ import TextField from "../../components/TextField";
 import handlePostOperation from "../../config/handlePostOperation";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useMyContext } from "../../context/MyContextProvider";
 
 const Login = () => {
+    const { name, fruits } = useMyContext()
     const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -28,6 +30,9 @@ const Login = () => {
     };
     return (
         <>
+            {name}
+            <br />
+            {fruits[0]}
             <div className="h-screen flex flex-col gap-3 justify-center items-center">
                 <p>Login</p>
                 <form
